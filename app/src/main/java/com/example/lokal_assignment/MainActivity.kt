@@ -10,6 +10,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        supportActionBar?.title = "Products"
+
         val prod_list_recyclerview = findViewById<RecyclerView>(R.id.prod_list_recyclerview)
         prod_list_recyclerview.layoutManager = LinearLayoutManager(this)
         prod_list_recyclerview.adapter = RecyclerViewAdapter()
