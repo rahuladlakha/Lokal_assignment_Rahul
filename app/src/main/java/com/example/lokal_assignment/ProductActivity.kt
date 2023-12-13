@@ -25,7 +25,7 @@ class ProductActivity : AppCompatActivity() {
         title_tv.text = product?.title
         rating_tv.text = "Rating: ${product?.rating}/5"
         price_tv.text = "$${product?.price}"
-        des_tv.text = product?.description
+        des_tv.text = "Description:\n${product?.description}"
         Glide.with(this).load(product?.thumbnail).into(thumbnail_iv)
 
         val img_recyclerview = findViewById<RecyclerView>(R.id.image_recyclerview)

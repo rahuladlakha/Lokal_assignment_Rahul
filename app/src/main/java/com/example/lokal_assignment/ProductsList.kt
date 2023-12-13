@@ -1,5 +1,6 @@
 package com.example.lokal_assignment
 
+//The JSON response will be parsed into ProductList and Product class objects
 data class ProductsList(val products: List<Product>)
 data class Product(
     val id : Int,

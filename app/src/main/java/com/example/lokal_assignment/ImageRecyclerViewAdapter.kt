@@ -1,15 +1,14 @@
 package com.example.lokal_assignment
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
+//Recyclerview for horizontal listview of images for product
 class ImageRecyclerViewAdapter(val context: Context, val images: List<String>?) : RecyclerView.Adapter<ImageRecyclerViewAdapter.CustomViewHolder>() {
     class CustomViewHolder(val view : View) : RecyclerView.ViewHolder(view){
         val imageView = view.findViewById<ImageView>(R.id.imageView)

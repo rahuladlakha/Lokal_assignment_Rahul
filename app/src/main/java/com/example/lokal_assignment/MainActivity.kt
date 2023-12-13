@@ -19,9 +19,10 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.title = "Products"
 
+        //Fetches the JSON response from endpoint using Retrofit
         getDataFromApi()
     }
-    fun getDataFromApi(){
+    fun getDataFromApi(){ //fetches JSON response from endpoint using Retrofit
         //Using retrofit to obtain JSON response from endpoint as Kotlin objects
         RetrofitHelper.productsApi.getProducts().enqueue(object : Callback<ProductsList?> {
             override fun onResponse(call: Call<ProductsList?>, response: Response<ProductsList?>) {
