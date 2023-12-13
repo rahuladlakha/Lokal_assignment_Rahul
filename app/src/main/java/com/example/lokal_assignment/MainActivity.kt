@@ -19,18 +19,15 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.title = "Products"
 
-        val prod_list_recyclerview = findViewById<RecyclerView>(R.id.prod_list_recyclerview)
-        prod_list_recyclerview.layoutManager = LinearLayoutManager(this)
-        prod_list_recyclerview.adapter = RecyclerViewAdapter(this)
-
         getDataFromApi()
     }
     fun getDataFromApi(){
         //Using retrofit to obtain JSON response from endpoint as Kotlin objects
         RetrofitHelper.productsApi.getProducts().enqueue(object : Callback<ProductsList?> {
             override fun onResponse(call: Call<ProductsList?>, response: Response<ProductsList?>) {
-                Log.i("ApiCall", response.body()?.products.toString())
-                Toast.makeText(this@MainActivity, response.body()?.products.toString(), Toast.LENGTH_LONG).show()
+                val prod_list_recyclerview = findViewById<RecyclerView>(R.id.prod_list_recyclerview)
+                prod_list_recyclerview.layoutManager = LinearLayoutManager(this@MainActivity)
+                prod_list_recyclerview.adapter = RecyclerViewAdapter(this@MainActivity, response.body()?.products)
             }
             override fun onFailure(call: Call<ProductsList?>, t: Throwable) {
                 Log.e("ApiCall", t.localizedMessage)

@@ -10,20 +10,25 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
-class RecyclerViewAdapter(val context: Context) : RecyclerView.Adapter<RecyclerViewAdapter.CustomViewHolder>(){
+class RecyclerViewAdapter(val context: Context, val products : List<Product>?) : RecyclerView.Adapter<RecyclerViewAdapter.CustomViewHolder>(){
     class CustomViewHolder(val view : View) : RecyclerView.ViewHolder(view){
-        val imageView = view.findViewById<ImageView>(R.id.prod_image_iv)
+        val imageView = view.findViewById<ImageView>(R.id.thumbnail_iv)
         val title_tv = view.findViewById<TextView>(R.id.prod_title_tv)
         val rating_tv = view.findViewById<TextView>(R.id.prod_rating_tv)
+        val price_tv = view.findViewById<TextView>(R.id.price_tv)
         val v = view
     }
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
+        if (products == null) return
+        holder.title_tv.text = products[position].title
+        holder.rating_tv.text = "Rating: ${products[position].rating}/5"
+        holder.price_tv.text = "$${products[position].price}"
         holder.v.setOnClickListener{
             Toast.makeText(context, "Position - $position", Toast.LENGTH_SHORT).show()
         }
     }
     override fun getItemCount(): Int {
-        return 10
+        return products?.size ?: 0
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val view = LayoutInflater.from(parent.context)
