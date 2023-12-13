@@ -1,6 +1,7 @@
 package com.example.lokal_assignment
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
@@ -9,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
 class RecyclerViewAdapter(val context: Context, val products : List<Product>?) : RecyclerView.Adapter<RecyclerViewAdapter.CustomViewHolder>(){
     class CustomViewHolder(val view : View) : RecyclerView.ViewHolder(view){
@@ -24,8 +26,11 @@ class RecyclerViewAdapter(val context: Context, val products : List<Product>?) :
         holder.rating_tv.text = "Rating: ${products[position].rating}/5"
         holder.price_tv.text = "$${products[position].price}"
         holder.v.setOnClickListener{
-            Toast.makeText(context, "Position - $position", Toast.LENGTH_SHORT).show()
+            val intent = Intent(context, ProductActivity::class.java)
+            ProductActivity.product = products[position]
+            context.startActivity(intent)
         }
+        Glide.with(context).load(products[position].thumbnail).into(holder.imageView)
     }
     override fun getItemCount(): Int {
         return products?.size ?: 0
@@ -35,4 +40,5 @@ class RecyclerViewAdapter(val context: Context, val products : List<Product>?) :
             .inflate(R.layout.prod_recyclerview_layout, parent, false)
         return CustomViewHolder(view)
     }
+
 }
